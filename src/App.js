@@ -39,10 +39,6 @@ function App() {
   const faceDetection = async () => {
     setInterval(async() => {
       const detections = await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
-      const faceexpression  = await faceapi.detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceExpressions(); 
-      //onsole.log(faceexpression.expressions)
-      await setMoodArray([faceexpression.expressions.angry,faceexpression.expressions.disgusted, faceexpression.expressions.fearful, faceexpression.expressions.happy, faceexpression.expressions.neutral, faceexpression.expressions.sad, faceexpression.expressions.surprised ])
-      console.log(moodarray)
       
       canvasRef.current.innerHtml = faceapi.createCanvasFromMedia(videoRef.current);
       faceapi.matchDimensions(canvasRef.current, {
@@ -70,6 +66,7 @@ function App() {
         <video crossOrigin='anonymous' ref={videoRef} autoPlay ></video>
       </div>
         <canvas ref={canvasRef} width="940" height="650" className='app__canvas' />
+
     </div>
   );
 }
